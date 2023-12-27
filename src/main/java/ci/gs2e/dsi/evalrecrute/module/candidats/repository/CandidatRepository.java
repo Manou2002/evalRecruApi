@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface CandidatRepository extends JpaRepository<Candidat, Integer>  {
     List<Candidat> findByOffreId(Integer offreId) ;
+
+    List<Candidat> findByCompteUtilisateurId(Integer compteUtilisateurId);
 }

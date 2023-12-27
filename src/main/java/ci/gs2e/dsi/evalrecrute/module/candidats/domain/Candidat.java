@@ -1,5 +1,6 @@
 package ci.gs2e.dsi.evalrecrute.module.candidats.domain;
 
+import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain.CompteUtilisateur;
 import ci.gs2e.dsi.evalrecrute.module.curriculumvitae.domain.CurriculumVitae;
 import ci.gs2e.dsi.evalrecrute.module.offres.domain.Offre;
 import jakarta.persistence.*;
@@ -36,6 +37,11 @@ public class Candidat {
 
     @OneToOne(mappedBy = "candidat",  cascade = CascadeType.ALL)
     private CurriculumVitae curriculumVitae;
+
+    @ManyToOne
+    @JoinColumn
+    private CompteUtilisateur compteUtilisateur;
+    
 
 
 }

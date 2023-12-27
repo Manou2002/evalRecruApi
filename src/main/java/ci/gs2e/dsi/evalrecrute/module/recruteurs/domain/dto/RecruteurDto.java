@@ -2,6 +2,7 @@ package ci.gs2e.dsi.evalrecrute.module.recruteurs.domain.dto;
 
 
 
+import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain.dto.CompteUtilisateurDto;
 import ci.gs2e.dsi.evalrecrute.module.recruteurs.domain.Recruteur;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ public class RecruteurDto {
     private String nom;
     private String prenom;
     private String email;
+    private CompteUtilisateurDto compteUtilisateur;
 
     private Boolean estActif;
 
@@ -27,6 +29,7 @@ public class RecruteurDto {
                 .nom(entity.getNom())
                 .prenom(entity.getPrenom())
                 .email(entity.getEmail())
+                .compteUtilisateur(CompteUtilisateurDto.toDto(entity.getCompteUtilisateur()))
                 .estActif(entity.getEstActif())
                 .build();
 
@@ -41,6 +44,7 @@ public class RecruteurDto {
         entity.setNom(dto.getNom());
         entity.setPrenom(dto.getPrenom());
         entity.setEmail(dto.getEmail());
+        entity.setCompteUtilisateur(CompteUtilisateurDto.toEntity(dto.getCompteUtilisateur()));
         entity.setEstActif(dto.getEstActif());
         return entity;
     }

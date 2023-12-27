@@ -1,5 +1,6 @@
 package ci.gs2e.dsi.evalrecrute.module.recruteurs.service;
 
+import ci.gs2e.dsi.evalrecrute.module.candidats.domain.dto.CandidatDto;
 import ci.gs2e.dsi.evalrecrute.module.curriculumvitae.domain.CurriculumVitae;
 import ci.gs2e.dsi.evalrecrute.module.curriculumvitae.domain.dto.CurriculumVitaeDto;
 import ci.gs2e.dsi.evalrecrute.module.recruteurs.domain.dto.RecruteurDto;
@@ -17,4 +18,6 @@ public interface RecruteurService {
     void delete (Integer id);
 
     List<CurriculumVitaeDto> getAllCurriculumVitaeByRecruteurId(Integer id);
+
+    List<RecruteurDto> getByCompteUtilisateurId(Integer id);
 }

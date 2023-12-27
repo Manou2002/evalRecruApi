@@ -17,6 +17,8 @@ public interface CandidatService {
     void delete (Integer id);
 
     List<CandidatDto> getByOffreId(Integer id);
+
+    List<CandidatDto> getByCompteUtilisateurId(Integer id);
     List<TestDto> getAllTestByCandidatId(Integer id);
 
 }

@@ -1,5 +1,6 @@
 package ci.gs2e.dsi.evalrecrute.module.recruteurs.controller;
 
+import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.service.CompteUtilisateurService;
 import ci.gs2e.dsi.evalrecrute.module.curriculumvitae.domain.dto.CurriculumVitaeDto;
 import ci.gs2e.dsi.evalrecrute.module.recruteurs.domain.dto.RecruteurDto;
 import ci.gs2e.dsi.evalrecrute.module.recruteurs.service.RecruteurService;
@@ -22,6 +23,9 @@ import java.util.Map;
 public class RecruteurController {
 
     private RecruteurService recruteurService;
+
+    private CompteUtilisateurService compteUtilisateurService;
+
 
     @Autowired
     public RecruteurController(RecruteurService recruteurService) {
@@ -87,5 +91,11 @@ public class RecruteurController {
     public List<CurriculumVitaeDto> getAllRecruteurs(@PathVariable("id") String id){
         return recruteurService.getAllCurriculumVitaeByRecruteurId(Integer.parseInt(id));
     }
+
+    @GetMapping("/{id}/recruteurs")
+    public List<RecruteurDto> getAllCompteUtilisateurs(@PathVariable("id") String id){
+        return compteUtilisateurService.getAllRecruteurByCompteUtilisateurId(Integer.parseInt(id));
+    }
+
 
 }

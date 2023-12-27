@@ -1,11 +1,9 @@
-package ci.gs2e.dsi.evalrecrute.module.candidats.controller;
-
+package ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.controller;
 
 import ci.gs2e.dsi.evalrecrute.module.candidats.domain.dto.CandidatDto;
-import ci.gs2e.dsi.evalrecrute.module.candidats.service.CandidatService;
+import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain.dto.CompteUtilisateurDto;
 import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.service.CompteUtilisateurService;
-import ci.gs2e.dsi.evalrecrute.module.offres.service.OffreService;
-import ci.gs2e.dsi.evalrecrute.module.tests.domain.dto.TestDto;
+import ci.gs2e.dsi.evalrecrute.module.recruteurs.domain.dto.RecruteurDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,57 +17,41 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/candidats")
-public class CandidatController {
+@RequestMapping("api/v1/compte-utilisateurs")
 
-   private OffreService offreService;
-    private CandidatService candidatService;
+public class CompteUtilisateurController {
 
     private CompteUtilisateurService compteUtilisateurService;
 
-
     @Autowired
-    public CandidatController(CandidatService candidatService) {
-        this.candidatService = candidatService;
+    public CompteUtilisateurController(CompteUtilisateurService compteUtilisateurService) {
+        this.compteUtilisateurService = compteUtilisateurService;
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody CandidatDto candidatDto) {
+    public ResponseEntity<Map<String, Object>> create(@RequestBody CompteUtilisateurDto compteUtilisateurDto) {
         Map<String, Object> response = new HashMap<>();
-        CandidatDto data = candidatService.create(candidatDto);
+        CompteUtilisateurDto data = compteUtilisateurService.create(compteUtilisateurDto);
         response.put("status", true);
         response.put("data", data);
         response.put("message", "Enresgistrement effectué avec succes ");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
     }
-
-    @PostMapping("create")
-    public ResponseEntity<Map<String, Object>> createWithCv(@RequestBody CandidatDto candidatDto) {
-        Map<String, Object> response = new HashMap<>();
-        CandidatDto data = candidatService.createWithCV(candidatDto, candidatDto.getCurriculumVitae());
-        response.put("status", true);
-        response.put("data", data);
-        response.put("message", "Enresgistrement effectué avec succes ");
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getById(@PathVariable("id") String id){
         Map<String, Object> response = new HashMap<>();
-        CandidatDto data = candidatService.getById((Integer.parseInt(id)));
+        CompteUtilisateurDto data = compteUtilisateurService.getById((Integer.parseInt(id)));
         response.put("status", true);
         response.put("data", data);
-        response.put("message", "Candidat numero :" +id);
+        response.put("Error message", "compte urilisateur numero :" +id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAll (@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         Map<String, Object> response = new HashMap<>();
         Pageable paging = PageRequest.of(page, size);
-        Page<CandidatDto> data = candidatService.getAll(paging);
+        Page<CompteUtilisateurDto> data = compteUtilisateurService.getAll(paging);
         response.put("statut", true);
         response.put("data", data.getContent());
         response.put("current_page", data.getNumber());
@@ -78,39 +60,32 @@ public class CandidatController {
         response.put("page-size", data.getSize());
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> update (@PathVariable("id") String id, @RequestBody CandidatDto candidatDto){
+    public ResponseEntity<Map<String, Object>> update (@PathVariable("id") String id, @RequestBody CompteUtilisateurDto compteUtilisateurDto){
         Map<String, Object> response = new HashMap<>();
-        CandidatDto data = candidatService.update(Integer.parseInt(id), candidatDto);
+        CompteUtilisateurDto data = compteUtilisateurService.update(Integer.parseInt(id), compteUtilisateurDto);
         response.put("statut", true);
         response.put("date", data);
-        response.put("message", "Modification effectué avec succès");
+        response.put("Error message", "Modification effectué avec succès");
         return ResponseEntity.status(HttpStatus.OK).body(response);
 
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete (@PathVariable("id") String id){
         Map<String, Object> response = new HashMap<>();
-        candidatService.delete(Integer.parseInt(id));
+        compteUtilisateurService.delete(Integer.parseInt(id));
         response.put("statut", true);
-        response.put("message", "suppression effectue avec succes");
+        response.put("Error message", "suppression effectue avec succes");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/{id}/candidats")
-    public List<CandidatDto> getAllOffres(@PathVariable("id") String id){
-        return offreService.getAllCandidatByOffreId(Integer.parseInt(id));
-    }
-    @GetMapping("/{id}/tests")
-    public List<TestDto> getAllCandidats(@PathVariable("id") String id){
-        return candidatService.getAllTestByCandidatId(Integer.parseInt(id));
-    }
-
-    @GetMapping("/{id}/candidats2")
-    public List<CandidatDto> getAllCompteUtilisateurs(@PathVariable("id") String id){
+    public List<CandidatDto> getAll3Candidats(@PathVariable("id") String id) {
         return compteUtilisateurService.getAllCandidatByCompteUtilisateurId(Integer.parseInt(id));
     }
 
+  @GetMapping("/{id}/recruteurs")
+    public List<RecruteurDto> getAllRecruteurs(@PathVariable("id") String id){
+        return compteUtilisateurService.getAllRecruteurByCompteUtilisateurId(Integer.parseInt(id));
+  }
 }

@@ -100,4 +100,14 @@ public class CandidatServiceImpl implements CandidatService {
         return testService.getByCandidatId(id);
     }
 
+    @Override
+    public List<CandidatDto> getByCompteUtilisateurId(Integer compteUtilisateurId){
+        List<Candidat> candidats = candidatRepository.findByCompteUtilisateurId(compteUtilisateurId);
+        if (candidats.isEmpty()){
+            log.error("il n'y a aucun candidat dans la base de donnee");
+        }
+        return candidats.stream().map(CandidatDto :: toDto).collect(Collectors.toList());
+    }
+
+
 }

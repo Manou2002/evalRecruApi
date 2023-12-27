@@ -1,7 +1,5 @@
-package ci.gs2e.dsi.evalrecrute.module.recruteurs.domain;
+package ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain;
 
-
-import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain.CompteUtilisateur;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,18 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "recruteurs")
-public class Recruteur {
+@Table(name = "compte_utilisateur")
+
+public class CompteUtilisateur {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String nom;
-    private String prenom;
     private String email;
+    private Integer password;
 
-    @Column(name = "est_actif")
+    @Column (name = "est_actif")
     private Boolean estActif;
 
     @Column (name = "created_by")
@@ -30,11 +28,5 @@ public class Recruteur {
 
     @Column (name = "updated_by")
     private String updatedBy;
-
-    @ManyToOne
-    @JoinColumn
-    private CompteUtilisateur compteUtilisateur;
-
-
 
 }

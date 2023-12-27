@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -76,6 +77,15 @@ public class RecruteurServiceImpl implements RecruteurService {
     @Override
     public List<CurriculumVitaeDto> getAllCurriculumVitaeByRecruteurId (Integer id){
         return curriculumVitaeService.getByRecruteurId(id);
+    }
+
+    @Override
+    public List<RecruteurDto> getByCompteUtilisateurId(Integer compteUtilisateurId){
+        List<Recruteur> recruteurs = recruteurRepository.findByCompteUtilisateurId(compteUtilisateurId);
+        if (recruteurs.isEmpty()){
+            log.error("il n'y a aucun recruteur dans la base de donnee");
+        }
+        return recruteurs.stream().map(RecruteurDto :: toDto).collect(Collectors.toList());
     }
 
 }

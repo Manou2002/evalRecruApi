@@ -1,6 +1,7 @@
 package ci.gs2e.dsi.evalrecrute.module.candidats.domain.dto;
 
 import ci.gs2e.dsi.evalrecrute.module.candidats.domain.Candidat;
+import ci.gs2e.dsi.evalrecrute.module.compteUtilisateurs.domain.dto.CompteUtilisateurDto;
 import ci.gs2e.dsi.evalrecrute.module.curriculumvitae.domain.dto.CurriculumVitaeDto;
 import ci.gs2e.dsi.evalrecrute.module.offres.domain.dto.OffreDto;
 import lombok.Builder;
@@ -18,6 +19,7 @@ public class CandidatDto {
     private Boolean estActif;
     private OffreDto offre;
     private CurriculumVitaeDto curriculumVitae;
+    private CompteUtilisateurDto compteUtilisateur;
 
     public static CandidatDto toDto(Candidat entity){
         if (entity == null){
@@ -30,6 +32,7 @@ public class CandidatDto {
                 .email(entity.getEmail())
                 .estActif(entity.getEstActif())
                 .offre(OffreDto.toDto(entity.getOffre()))
+                .compteUtilisateur(CompteUtilisateurDto.toDto(entity.getCompteUtilisateur()))
                 .curriculumVitae(CurriculumVitaeDto.toDto(entity.getCurriculumVitae()))
                 .build();
     }
@@ -44,6 +47,7 @@ public class CandidatDto {
         entity.setEmail(dto.getEmail());
         entity.setEstActif(dto.getEstActif());
         entity.setOffre(OffreDto.toEntity(dto.getOffre()));
+        entity.setCompteUtilisateur(CompteUtilisateurDto.toEntity(dto.getCompteUtilisateur()));
         entity.setCurriculumVitae(CurriculumVitaeDto.toEntity(dto.getCurriculumVitae()));
         return entity;
     }
