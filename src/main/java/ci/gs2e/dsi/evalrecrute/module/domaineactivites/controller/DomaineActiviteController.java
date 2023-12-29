@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/domaine-activites")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class DomaineActiviteController {
     private DomaineActiviteService domaineActiviteService;
 
