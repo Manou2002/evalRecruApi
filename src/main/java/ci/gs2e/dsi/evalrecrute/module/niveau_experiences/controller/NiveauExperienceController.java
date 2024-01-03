@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/niveau_experiences")
+@RequestMapping("api/v1/niveau-experiences")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 
 public class NiveauExperienceController {
 

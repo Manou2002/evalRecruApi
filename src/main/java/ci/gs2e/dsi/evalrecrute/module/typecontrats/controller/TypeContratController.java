@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/type-contrats")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 
 public class TypeContratController {
 

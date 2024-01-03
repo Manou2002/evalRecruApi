@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/niveau-etudes")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 
 public class NiveauEtudeController {
 
