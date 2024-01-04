@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +55,11 @@ public class TypeContratController {
         Pageable paging = PageRequest.of(page, size);
         Page<TypeContratDto> data = typeContratService.getAll(paging);
         response.put("statut", true);
-        response.put("data", data.getContent());
-        response.put("current_page", data.getNumber());
-        response.put("total_items", data.getTotalElements());
-        response.put("total_pages", data.getTotalPages());
-        response.put("page-size", data.getSize());
+        response.put("data", data!=null ? data.getContent() : new ArrayList<>());
+        response.put("current_page", data!=null ? data.getNumber() : 0);
+        response.put("total_items", data!=null ? data.getTotalElements() : 0);
+        response.put("total_pages", data!=null ? data.getTotalPages() : 0);
+        response.put("page-size", data!=null ? data.getSize() : 0);
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PutMapping("/{id}")

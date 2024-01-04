@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,8 @@ public class Offre {
     private String titre;
     private String mission;
     private String competence;
+
+    @CreatedDate
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
