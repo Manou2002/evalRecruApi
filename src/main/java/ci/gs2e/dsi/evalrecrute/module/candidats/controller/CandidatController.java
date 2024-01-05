@@ -99,10 +99,10 @@ public class CandidatController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/{id}/candidats")
+ /*   @GetMapping("/{id}/candidats")
     public List<CandidatDto> getAllOffres(@PathVariable("id") String id){
         return offreService.getAllCandidatByOffreId(Integer.parseInt(id));
-    }
+    }*/
     @GetMapping("/{id}/tests")
     public List<TestDto> getAllCandidats(@PathVariable("id") String id){
         return candidatService.getAllTestByCandidatId(Integer.parseInt(id));

@@ -5,11 +5,14 @@ import ci.gs2e.dsi.evalrecrute.module.domaineactivites.domain.dto.DomaineActivit
 import ci.gs2e.dsi.evalrecrute.module.niveauEtudes.domain.dto.NiveauEtudeDto;
 import ci.gs2e.dsi.evalrecrute.module.niveau_experiences.domain.dto.NiveauExperienceDto;
 import ci.gs2e.dsi.evalrecrute.module.offres.domain.Offre;
+import ci.gs2e.dsi.evalrecrute.module.postulers.domain.Postuler;
+import ci.gs2e.dsi.evalrecrute.module.postulers.domain.dto.PostulerDto;
 import ci.gs2e.dsi.evalrecrute.module.typecontrats.domain.dto.TypeContratDto;
 import lombok.Builder;
 import lombok.Data;
 
 ;import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Data
 @Builder
@@ -18,16 +21,15 @@ public class OffreDto {
     private String titre;
     private String mission;
     private String competence;
-    private LocalDate dateDebut;
+    private LocalDate dateOffre;
     private LocalDate dateFin;
     private Integer nombrePoste;
     private DomaineActiviteDto domaineActivite;
     private NiveauEtudeDto niveauEtude;
     private NiveauExperienceDto niveauExperience;
     private TypeContratDto typeContrat;
-    private CandidatDto candidat;
-
     private Boolean estActif;
+    private ArrayList<PostulerDto>  postuler = new ArrayList<>();
 
     public static OffreDto toDto(Offre entity){
         if (entity == null) {
@@ -38,7 +40,7 @@ public class OffreDto {
                 .titre(entity.getTitre())
                 .mission(entity.getMission())
                 .competence(entity.getCompetence())
-                .dateDebut(entity.getDateDebut())
+                .dateOffre(entity.getDateOffre())
                 .dateFin(entity.getDateFin())
                 .nombrePoste(entity.getNombrePoste())
                 .domaineActivite(DomaineActiviteDto.toDto(entity.getDomaineActivite()))
@@ -58,7 +60,7 @@ public class OffreDto {
         entity.setTitre(dto.getTitre());
         entity.setMission(dto.getMission());
         entity.setCompetence(dto.getCompetence());
-        entity.setDateDebut(dto.getDateDebut());
+        entity.setDateOffre(dto.getDateOffre());
         entity.setDateFin(dto.getDateFin());
         entity.setNombrePoste(dto.getNombrePoste());
         entity.setEstActif(dto.getEstActif());

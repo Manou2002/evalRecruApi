@@ -1,8 +1,9 @@
-package ci.gs2e.dsi.evalrecrute.module.offres.controller;
+package ci.gs2e.dsi.evalrecrute.module.postulers.controller;
 
-import ci.gs2e.dsi.evalrecrute.module.candidats.domain.dto.CandidatDto;
 import ci.gs2e.dsi.evalrecrute.module.offres.domain.dto.OffreDto;
 import ci.gs2e.dsi.evalrecrute.module.offres.service.OffreService;
+import ci.gs2e.dsi.evalrecrute.module.postulers.domain.dto.PostulerDto;
+import ci.gs2e.dsi.evalrecrute.module.postulers.service.PostulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,19 +18,20 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/offres")
-@CrossOrigin(origins = "*",allowedHeaders = "*")
-public class OffreController {
-    private OffreService offreService;
+@RequestMapping("api/v1/postulers")
+@CrossOrigin
+public class PostulerController {
+
+    private PostulerService postulerService;
 
     @Autowired
-    public OffreController(OffreService offreService){
-        this.offreService = offreService;
+    public PostulerController(PostulerService postulerService){
+        this.postulerService = postulerService;
     }
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody OffreDto posteDto){
+    public ResponseEntity<Map<String, Object>> create(@RequestBody PostulerDto postulerDto){
         Map<String, Object> response = new HashMap<>();
-        OffreDto data = offreService.create(posteDto);
+        PostulerDto data = postulerService.create(postulerDto);
         response.put("status", true);
         response.put("data", data);
         response.put("Message", "Enresgistrement effectué avec succes ");
@@ -39,7 +41,7 @@ public class OffreController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getById(@PathVariable("id") String id){
         Map<String, Object> response = new HashMap<>();
-        OffreDto data = offreService.getById((Integer.parseInt(id)));
+        PostulerDto data = postulerService.getById((Integer.parseInt(id)));
         response.put("status", true);
         response.put("data", data);
         response.put("Message", "Poste numero :" +id);
@@ -49,7 +51,7 @@ public class OffreController {
     public ResponseEntity<Map<String, Object>> getAll (@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         Map<String, Object> response = new HashMap<>();
         Pageable paging = PageRequest.of(page, size);
-        Page<OffreDto> data = offreService.getAll(paging);
+        Page<PostulerDto> data = postulerService.getAll(paging);
         response.put("statut", true);
         response.put("data", data!=null ? data.getContent() : new ArrayList<>());
         response.put("current_page", data!=null ? data.getNumber() : 0);
@@ -59,9 +61,9 @@ public class OffreController {
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> update (@PathVariable("id") String id, @RequestBody OffreDto posteDto){
+    public ResponseEntity<Map<String, Object>> update (@PathVariable("id") String id, @RequestBody PostulerDto postulerDto){
         Map<String, Object> response = new HashMap<>();
-        OffreDto data = offreService.update(Integer.parseInt(id), posteDto);
+        PostulerDto data = postulerService.update(Integer.parseInt(id), postulerDto);
         response.put("statut", true);
         response.put("date", data);
         response.put("Message", "Modification effectué avec succès");
@@ -71,14 +73,17 @@ public class OffreController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete (@PathVariable("id") String id){
         Map<String, Object> response = new HashMap<>();
-        offreService.delete(Integer.parseInt(id));
+        postulerService.delete(Integer.parseInt(id));
         response.put("statut", true);
         response.put("Message", "suppression effectue avec succes");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
-    /*@GetMapping("/{id}/candidats")
-    public List<CandidatDto> getAllOffres(@PathVariable("id") String id){
-        return offreService.getAllCandidatByOffreId(Integer.parseInt(id));
-    }*/
+    @GetMapping("/{id}/candidats")
+    public List<PostulerDto> getAllByCandidatId(@PathVariable("id") String id){
+        return postulerService.getAllByCandidatId(Integer.parseInt(id));
+    }
+    @GetMapping("/{id}/offres")
+    public List<PostulerDto> getAllByOffreId(@PathVariable("id") String id){
+        return postulerService.getAllByOffreId(Integer.parseInt(id));
+    }
 }

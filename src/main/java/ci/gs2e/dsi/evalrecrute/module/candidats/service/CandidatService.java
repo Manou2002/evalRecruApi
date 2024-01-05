@@ -16,8 +16,6 @@ public interface CandidatService {
     CandidatDto update (Integer id, CandidatDto candidatDto);
     void delete (Integer id);
 
-    List<CandidatDto> getByOffreId(Integer id);
-
     List<CandidatDto> getByCompteUtilisateurId(Integer id);
     List<TestDto> getAllTestByCandidatId(Integer id);
 

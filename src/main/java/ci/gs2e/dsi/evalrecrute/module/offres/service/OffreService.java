@@ -15,7 +15,7 @@ public interface OffreService {
     void delete (Integer id);
 
     List<OffreDto> getByDomaineActiviteId(Integer id);
-    List<CandidatDto> getAllCandidatByOffreId(Integer id);
+   /* List<CandidatDto> getAllCandidatByOffreId(Integer id);*/
 
     List<OffreDto> getByTypeContratId(Integer id);
 

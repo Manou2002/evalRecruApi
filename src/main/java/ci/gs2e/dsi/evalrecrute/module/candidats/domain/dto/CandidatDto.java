@@ -31,7 +31,6 @@ public class CandidatDto {
                 .prenom(entity.getPrenom())
                 .email(entity.getEmail())
                 .estActif(entity.getEstActif())
-                .offre(OffreDto.toDto(entity.getOffre()))
                 .compteUtilisateur(CompteUtilisateurDto.toDto(entity.getCompteUtilisateur()))
                 .curriculumVitae(CurriculumVitaeDto.toDto(entity.getCurriculumVitae()))
                 .build();
@@ -46,7 +45,6 @@ public class CandidatDto {
         entity.setPrenom(dto.getPrenom());
         entity.setEmail(dto.getEmail());
         entity.setEstActif(dto.getEstActif());
-        entity.setOffre(OffreDto.toEntity(dto.getOffre()));
         entity.setCompteUtilisateur(CompteUtilisateurDto.toEntity(dto.getCompteUtilisateur()));
         entity.setCurriculumVitae(CurriculumVitaeDto.toEntity(dto.getCurriculumVitae()));
         return entity;

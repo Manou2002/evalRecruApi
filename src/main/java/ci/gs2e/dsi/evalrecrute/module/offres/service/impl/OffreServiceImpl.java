@@ -105,10 +105,10 @@ public class OffreServiceImpl implements OffreService {
         return offres.stream().map(OffreDto::toDto).collect(Collectors.toList());
     }
 
-    @Override
+  /*  @Override
     public List<CandidatDto> getAllCandidatByOffreId(Integer id){
         return candidatService.getByOffreId(id);
-    }
+    }*/
 
 
 }

@@ -5,7 +5,9 @@ import ci.gs2e.dsi.evalrecrute.module.domaineactivites.domain.DomaineActivite;
 import ci.gs2e.dsi.evalrecrute.module.niveauEtudes.domain.NiveauEtude;
 import ci.gs2e.dsi.evalrecrute.module.niveau_experiences.domain.NiveauExperience;
 import ci.gs2e.dsi.evalrecrute.module.niveau_experiences.service.NiveauExperienceService;
+import ci.gs2e.dsi.evalrecrute.module.postulers.domain.Postuler;
 import ci.gs2e.dsi.evalrecrute.module.typecontrats.domain.TypeContrat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +15,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,8 +32,8 @@ public class Offre {
     private String mission;
     private String competence;
 
-    @CreatedDate
-    private LocalDate dateDebut;
+    @Column(name = "date_offre", columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+    private LocalDate dateOffre;
     private LocalDate dateFin;
 
     @Column(name = "nombre_poste")
@@ -59,6 +63,10 @@ public class Offre {
     @ManyToOne
     @JoinColumn(name = "niveau_etude_id")
     private NiveauEtude niveauEtude;
+
+    @OneToMany(targetEntity = Postuler.class, mappedBy = "offre")
+   // @JsonIgnore
+    private List<Postuler> postuler = new ArrayList<>();
 
 }
 

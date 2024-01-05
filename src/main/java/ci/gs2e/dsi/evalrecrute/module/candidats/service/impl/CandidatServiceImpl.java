@@ -87,15 +87,6 @@ public class CandidatServiceImpl implements CandidatService {
         candidatRepository.delete(CandidatDto.toEntity(candidatDto));
     }
     @Override
-    public List<CandidatDto> getByOffreId(Integer offreId){
-        List<Candidat> candidats = candidatRepository.findByOffreId(offreId);
-        if (candidats.isEmpty()){
-            log.error("il n'y a aucun candidat dans la base de donnee");
-        }
-        return candidats.stream().map(CandidatDto :: toDto).collect(Collectors.toList());
-    }
-
-    @Override
     public List<TestDto> getAllTestByCandidatId(Integer id){
         return testService.getByCandidatId(id);
     }
